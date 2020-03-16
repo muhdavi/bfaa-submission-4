@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Movie Catalogue</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tv">TV Show</string>
+    <string name="title_favorite">Favorite</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description">Description</string>
+    <string name="overview">Description</string>
+    <string name="img_content">Image Content</string>
+    <string name="title">Title</string>
+    <string name="vote_average">Vote Acerange</string>
+    <string name="detail">Detail</string>
+    <string name="release_date">Release Date</string>
+    <string name="vote_count">Vote Count</string>
+</resources>
