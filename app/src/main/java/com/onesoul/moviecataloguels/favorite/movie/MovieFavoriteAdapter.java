@@ -1,6 +1,7 @@
 package com.onesoul.moviecataloguels.favorite.movie;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.onesoul.moviecataloguels.R;
 import com.onesoul.moviecataloguels.movie.Movie;
+import com.onesoul.moviecataloguels.movie.MovieDetailActivity;
 
 import java.util.ArrayList;
 
@@ -53,7 +55,7 @@ public class MovieFavoriteAdapter extends RecyclerView.Adapter<MovieFavoriteAdap
         return listMovieFavorite.size();
     }
 
-    static class MovieFavoriteViewHolder extends RecyclerView.ViewHolder {
+    public class MovieFavoriteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvTitle, tvOverview, tvRate;
         ImageView imgPhoto;
 
@@ -63,6 +65,17 @@ public class MovieFavoriteAdapter extends RecyclerView.Adapter<MovieFavoriteAdap
             tvOverview = itemView.findViewById(R.id.tv_overview);
             tvRate = itemView.findViewById(R.id.tv_rate);
             imgPhoto = itemView.findViewById(R.id.img_poster);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Intent movieIntent = new Intent(activity, MovieDetailActivity.class);
+                movieIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, getMovieFavorite().get(position));
+                activity.startActivity(movieIntent);
+            }
         }
     }
 

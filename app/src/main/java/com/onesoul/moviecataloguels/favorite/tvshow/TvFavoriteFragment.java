@@ -1,4 +1,4 @@
-package com.onesoul.moviecataloguels.favorite.movie;
+package com.onesoul.moviecataloguels.favorite.tvshow;
 
 import android.os.Bundle;
 
@@ -14,32 +14,30 @@ import android.view.ViewGroup;
 
 import com.onesoul.moviecataloguels.MainViewModel;
 import com.onesoul.moviecataloguels.R;
-import com.onesoul.moviecataloguels.movie.Movie;
+import com.onesoul.moviecataloguels.tvshow.Tvshow;
 
 import java.util.ArrayList;
 
-public class MovieFavoriteFragment extends Fragment {
+public class TvFavoriteFragment extends Fragment {
     private RecyclerView recyclerView;
-    private MovieFavoriteAdapter movieFavoriteAdapter;
+    private TvFavoriteAdapter tvFavoriteAdapter;
 
-    public MovieFavoriteFragment() {
-        // Required empty public constructor
+    public TvFavoriteFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_movie_favorite, container, false);
-        recyclerView = view.findViewById(R.id.rv_movie_favorite_fragment);
+        View view = inflater.inflate(R.layout.fragment_tv_favorite, container, false);
+        recyclerView = view.findViewById(R.id.rv_tv_favorite_fragment);
 
         MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mainViewModel.getMoviesFavorite("movie").observe(getViewLifecycleOwner(), getMovieFavorite);
+        mainViewModel.getTvFavorite("tvshow").observe(getViewLifecycleOwner(), getTvFavorite);
 
-        movieFavoriteAdapter = new MovieFavoriteAdapter(getActivity());
-        movieFavoriteAdapter.notifyDataSetChanged();
-        mainViewModel.setMovieDatabase("movie");
+        tvFavoriteAdapter = new TvFavoriteAdapter(getActivity());
+        tvFavoriteAdapter.notifyDataSetChanged();
+        mainViewModel.setTvDatabase("tvshow");
         showRecyclerList();
         recyclerView.setHasFixedSize(true);
 
@@ -48,14 +46,14 @@ public class MovieFavoriteFragment extends Fragment {
 
     private void showRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(movieFavoriteAdapter);
+        recyclerView.setAdapter(tvFavoriteAdapter);
     }
 
-    private final Observer<ArrayList<Movie>> getMovieFavorite = new Observer<ArrayList<Movie>>() {
+    private final Observer<ArrayList<Tvshow>> getTvFavorite = new Observer<ArrayList<Tvshow>>() {
         @Override
-        public void onChanged(ArrayList<Movie> movies) {
-            if (movies != null) {
-                movieFavoriteAdapter.setListMovieFavorite(movies);
+        public void onChanged(ArrayList<Tvshow> tvshows) {
+            if (tvshows != null) {
+                tvFavoriteAdapter.setListTvFavorite(tvshows);
                 showRecyclerList();
             }
         }
@@ -64,6 +62,6 @@ public class MovieFavoriteFragment extends Fragment {
     public void onResume() {
         super.onResume();
         MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mainViewModel.setMovieDatabase("movie");
+        mainViewModel.setTvDatabase("tvshow");
     }
 }

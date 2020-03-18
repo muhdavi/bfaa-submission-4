@@ -29,6 +29,7 @@ public class MainViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<Movie>> listMovies = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Movie>> listMoviesFavorite = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Tvshow>> listTvshows = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Tvshow>> listTvFavorite = new MutableLiveData<>();
 
     private ApiInterface apiInterface;
     private DMLHelper dmlHelper;
@@ -36,6 +37,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+        this.dmlHelper = dmlHelper.getInstance(application);
     }
 
     public LiveData<ArrayList<Movie>> getMovies() {
@@ -124,5 +126,15 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<ArrayList<Movie>> getMoviesFavorite(String type) {
         setMovieDatabase(type);
         return listMoviesFavorite;
+    }
+
+    public void setTvDatabase(String type) {
+        ArrayList<Tvshow> tvshows = dmlHelper.getListTvFavorite(type);
+        listTvFavorite.postValue(tvshows);
+    }
+
+    public LiveData<ArrayList<Tvshow>> getTvFavorite(String type) {
+        setTvDatabase(type);
+        return listTvFavorite;
     }
 }

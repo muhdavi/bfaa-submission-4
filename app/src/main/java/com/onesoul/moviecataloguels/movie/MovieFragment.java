@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,12 +22,14 @@ import java.util.Objects;
 public class MovieFragment extends Fragment {
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
+    private ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_movie, container, false);
         recyclerView = root.findViewById(R.id.rv_movie_fragment);
+        progressBar = root.findViewById(R.id.progress_bar);
 
         MainViewModel mainViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);
         mainViewModel.getMovies().observe(getViewLifecycleOwner(), getMovie);
@@ -36,6 +39,7 @@ public class MovieFragment extends Fragment {
         movieAdapter.notifyDataSetChanged();
 
         showRecyclerList();
+        showLoading(true);
         recyclerView.setHasFixedSize(true);
 
         return root;
@@ -52,9 +56,19 @@ public class MovieFragment extends Fragment {
             if (movies != null) {
                 movieAdapter.setListMovie(movies);
                 showRecyclerList();
+                showLoading(false);
+            } else {
+                showLoading(false);
             }
         }
     };
 
 
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 }

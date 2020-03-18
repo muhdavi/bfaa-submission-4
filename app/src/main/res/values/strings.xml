@@ -1,14 +1,10 @@
 <resources>
     <string name="app_name">Movie Catalogue</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_movie">Movie</string>
     <string name="title_tv">TV Show</string>
     <string name="title_favorite">Favorite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">Description</string>
     <string name="overview">Description</string>
     <string name="img_content">Image Content</string>
@@ -17,4 +13,10 @@
     <string name="detail">Detail</string>
     <string name="release_date">Release Date</string>
     <string name="vote_count">Vote Count</string>
+    <string name="change_language_settings">Change Language</string>
+    <string name="detail_movie">Detail Movie</string>
+    <string name="has_add">has added to Favorite</string>
+    <string name="hasnot_add">has not added to Favorite</string>
+    <string name="has_delete">has delete from Favorite</string>
+    <string name="hasnot_delete">has not delete from Favorite</string>
 </resources>

@@ -8,11 +8,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.onesoul.moviecataloguels.movie.Movie;
+import com.onesoul.moviecataloguels.tvshow.Tvshow;
 
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
 import static com.onesoul.moviecataloguels.database.DatabaseContract.MovieColumns.MOVIE_ID;
+import static com.onesoul.moviecataloguels.database.DatabaseContract.MovieColumns.TV_ID;
 import static com.onesoul.moviecataloguels.database.DatabaseContract.MovieColumns.TYPE;
 import static com.onesoul.moviecataloguels.database.DatabaseContract.MovieColumns.TITLE;
 import static com.onesoul.moviecataloguels.database.DatabaseContract.MovieColumns.OVERVIEW;
@@ -27,6 +29,7 @@ public class DMLHelper {
     private static DatabaseHelper databaseHelper;
     private static DMLHelper INSTANCE;
     private static SQLiteDatabase sqLiteDatabase;
+
 
     private DMLHelper(Context context) {
         databaseHelper = new DatabaseHelper(context);
@@ -96,6 +99,72 @@ public class DMLHelper {
                 movie.setmVoteAverage(cursor.getString(cursor.getColumnIndexOrThrow(VOTE_AVERAGE)));
                 movie.setmPhoto(cursor.getString(cursor.getColumnIndexOrThrow(URL_IMAGE)));
                 arrayList.add(movie);
+                cursor.moveToNext();
+            } while (!cursor.isAfterLast());
+        }
+        cursor.close();
+        return arrayList;
+    }
+
+    public boolean CheckData(String id) throws SQLException {
+        boolean isFavorite = false;
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE
+        + " WHERE " + MOVIE_ID + "=?", new String[]{id});
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                isFavorite = true;
+            } while (cursor.moveToNext());
+        }
+        assert cursor != null;
+        cursor.close();
+        return isFavorite;
+    }
+
+    public long insertTvshow(Tvshow tvshow) {
+        ContentValues args = new ContentValues();
+        args.put(_ID, tvshow.getmId());
+        args.put(TV_ID, tvshow.getmId());
+        args.put(TYPE, tvshow.getmType());
+        args.put(TITLE, tvshow.getmTitle());
+        args.put(OVERVIEW, tvshow.getmOverview());
+        args.put(RELEASE_DATE, tvshow.getmReleaseDate());
+        args.put(VOTE_COUNT, tvshow.getmVoteCount());
+        args.put(VOTE_AVERAGE, tvshow.getmVoteAverage());
+        args.put(URL_IMAGE, tvshow.getmPhoto());
+        return sqLiteDatabase.insert(DATABASE_TABLE, null, args);
+    }
+
+    public long deleteTvshow(int id) {
+        return sqLiteDatabase.delete(DATABASE_TABLE, _ID + " = '" + id + "'", null);
+    }
+
+    public ArrayList<Tvshow> getListTvFavorite(String type) {
+        ArrayList<Tvshow> arrayList = new ArrayList<>();
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE,
+                new String[]{_ID, TYPE, TITLE, OVERVIEW, RELEASE_DATE, VOTE_COUNT, VOTE_AVERAGE, URL_IMAGE},
+                TYPE + "=?",
+                new String[]{type},
+                null,
+                null,
+                _ID + " ASC",
+                null);
+        cursor.moveToFirst();
+        Tvshow tvshow;
+        if (cursor.getCount() > 0) {
+            do {
+                tvshow = new Tvshow();
+                tvshow.setmId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
+                tvshow.setmType(cursor.getString(cursor.getColumnIndexOrThrow(TYPE)));
+                tvshow.setmTitle(cursor.getString(cursor.getColumnIndexOrThrow(TITLE)));
+                tvshow.setmOverview(cursor.getString(cursor.getColumnIndexOrThrow(OVERVIEW)));
+                tvshow.setmReleaseDate(cursor.getString(cursor.getColumnIndexOrThrow(RELEASE_DATE)));
+                tvshow.setmVoteCount(cursor.getString(cursor.getColumnIndexOrThrow(VOTE_COUNT)));
+                tvshow.setmVoteAverage(cursor.getString(cursor.getColumnIndexOrThrow(VOTE_AVERAGE)));
+                tvshow.setmPhoto(cursor.getString(cursor.getColumnIndexOrThrow(URL_IMAGE)));
+                arrayList.add(tvshow);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
         }

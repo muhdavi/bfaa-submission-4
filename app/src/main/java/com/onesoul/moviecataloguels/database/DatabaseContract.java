@@ -1,7 +1,5 @@
 package com.onesoul.moviecataloguels.database;
 
-import android.database.Cursor;
-import android.net.Uri;
 import android.provider.BaseColumns;
 
 public class DatabaseContract {

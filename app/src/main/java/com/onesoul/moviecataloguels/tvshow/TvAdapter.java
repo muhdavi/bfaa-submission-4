@@ -1,6 +1,7 @@
 package com.onesoul.moviecataloguels.tvshow;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder> {
     public void onBindViewHolder(@NonNull TvViewHolder holder, int position) {
         holder.tvTitle.setText(getListTv().get(position).getmTitle());
         holder.tvOverview.setText(getListTv().get(position).getmOverview());
-        holder.tvRate.setText(getListTv().get(position).getmVote());
+        holder.tvRate.setText(getListTv().get(position).getmVoteAverage());
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500/" + getListTv().get(position).getmPhoto())
                 .apply(new RequestOptions()
@@ -59,7 +60,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder> {
         return getListTv().size();
     }
 
-    static class TvViewHolder extends RecyclerView.ViewHolder {
+    class TvViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvTitle, tvOverview, tvRate;
         ImageView imgPhoto;
 
@@ -69,6 +70,17 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder> {
             tvOverview = itemView.findViewById(R.id.tv_overview);
             tvRate = itemView.findViewById(R.id.tv_rate);
             imgPhoto = itemView.findViewById(R.id.img_poster);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Intent tvIntent = new Intent(context, TvDetailActivity.class);
+                tvIntent.putExtra(TvDetailActivity.EXTRA_TV, getListTv().get(position));
+                context.startActivity(tvIntent);
+            }
         }
     }
 }

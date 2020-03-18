@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.onesoul.moviecataloguels.favorite.movie.MovieFavoriteFragment;
-import com.onesoul.moviecataloguels.tvshow.TvFavoriteFragment;
+import com.onesoul.moviecataloguels.favorite.tvshow.TvFavoriteFragment;
 
 public class ViewPageAdapter extends FragmentPagerAdapter {
     private final Fragment[] tabFragments;

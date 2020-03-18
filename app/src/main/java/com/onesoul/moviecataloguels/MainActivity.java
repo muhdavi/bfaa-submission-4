@@ -1,6 +1,10 @@
 package com.onesoul.moviecataloguels;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -20,52 +24,26 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        /*navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        if (savedInstanceState == null) {
-            navView.setSelectedItemId(R.id.navigation_movie);
-        }*/
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_tvshow, R.id.navigation_tvshow, R.id.navigation_favorite)
+                R.id.navigation_movie, R.id.navigation_tvshow, R.id.navigation_favorite)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.main_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-    /*private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-        = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
-
-            switch (item.getItemId()) {
-                case R.id.navigation_movie:
-                    fragment = new MovieFragment();
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_fragment, fragment, fragment.getClass().getSimpleName())
-                            .commit();
-                    return true;
-                case R.id.navigation_tvshow:
-                    fragment = new TvFragment();
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_fragment, fragment, fragment.getClass().getSimpleName())
-                            .commit();
-                    return true;
-                case R.id.navigation_favorite:
-                    fragment = new FavoriteFragment();
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_fragment, fragment, fragment.getClass().getSimpleName())
-                            .commit();
-                    return true;
-            }
-            return false;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_change_settings) {
+            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(mIntent);
         }
-    };*/
-
+        return super.onOptionsItemSelected(item);
+    }
 }

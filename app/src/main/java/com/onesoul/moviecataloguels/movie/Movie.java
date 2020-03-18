@@ -38,7 +38,7 @@ public class Movie implements Parcelable {
         return mTitle;
     }
 
-    public void setmTitle(String mName) {
+    public void setmTitle(String mTitle) {
         this.mTitle = mTitle;
     }
 
@@ -101,7 +101,7 @@ public class Movie implements Parcelable {
             this.mId = id;
             this.mTitle = title;
             this.mOverview = overview;
-            this.mReleaseDate = release_date;
+            this.mReleaseDate = formatter.format(dateFormat.parse(release_date));
             this.mVoteCount = vote_count;
             this.mVoteAverage = vote_average;
             this.mPhoto = url_image;

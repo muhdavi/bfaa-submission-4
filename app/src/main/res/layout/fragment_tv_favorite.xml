@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_tv_favorite"
-    tools:context=".tvshow.TvFavoriteFragment">
+    android:id="@+id/fragment_movie_favorite"
+    tools:context=".favorite.tvshow.TvFavoriteFragment">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_tv_favorite_fragment"
+        app:layout_constraintEnd_toEndOf="@+id/rv_tv_favorite_fragment"
+        app:layout_constraintStart_toStartOf="@id/rv_tv_favorite_fragment"
+        app:layout_constraintTop_toTopOf="@id/rv_tv_favorite_fragment"
+        style="?android:attr/progressBarStyle" />
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tv_favorite_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/list_item" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

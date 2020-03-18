@@ -15,7 +15,7 @@ public class ApiClient {
                 .setLenient()
                 .create();
         if(retrofit == null) {
-            String BASE_URL = "http://api.themoviedb.org/3/";
+            String BASE_URL = "https://api.themoviedb.org/3/";
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())

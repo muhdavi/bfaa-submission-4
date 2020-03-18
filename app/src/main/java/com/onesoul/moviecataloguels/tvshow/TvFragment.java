@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +23,8 @@ import java.util.Objects;
 
 public class TvFragment extends Fragment {
     private RecyclerView recyclerView;
-    private MainViewModel mainViewModel;
     private TvAdapter tvAdapter;
+    private ProgressBar progressBar;
 
     public TvFragment() {
     }
@@ -32,8 +33,9 @@ public class TvFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_tv, container, false);
         recyclerView = root.findViewById(R.id.rv_tv_fragment);
+        progressBar = root.findViewById(R.id.progress_bar);
 
-        mainViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);
+        MainViewModel mainViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);
         mainViewModel.getTvshows().observe(getViewLifecycleOwner(), getTvshow);
         mainViewModel.setTvshow();
 
@@ -41,6 +43,7 @@ public class TvFragment extends Fragment {
         tvAdapter.notifyDataSetChanged();
 
         showRecyclerList();
+        showLoading(true);
         recyclerView.setHasFixedSize(true);
 
         return root;
@@ -57,7 +60,18 @@ public class TvFragment extends Fragment {
             if (tvshows != null) {
                 tvAdapter.setListTv(tvshows);
                 showRecyclerList();
+                showLoading(false);
+            } else {
+                showLoading(false);
             }
         }
     };
+
+    private void showLoading(Boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 }

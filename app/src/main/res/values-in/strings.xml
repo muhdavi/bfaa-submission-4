@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Katalog Film</string>
+    <string name="title_movie">Film</string>
+    <string name="title_tv">Acara TV</string>
+    <string name="title_favorite">Kesukaan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="description">Deskripsi</string>
+    <string name="overview">Deskripsi</string>
+    <string name="img_content">Konten Gambar</string>
+    <string name="title">Judul</string>
+    <string name="vote_average">Rerata Vote</string>
+    <string name="detail">Rincian</string>
+    <string name="release_date">Tanggal Rilis</string>
+    <string name="vote_count">Jumlah Vote</string>
+    <string name="change_language_settings">Ubah Bahasa</string>
+    <string name="detail_movie">Rincian Film</string>
+    <string name="has_add">telah ditambahkan ke Kesukaan</string>
+    <string name="hasnot_add">gagal ditambahkan ke Kesukaan</string>
+    <string name="has_delete">telah dihapus dari Kesukaan</string>
+    <string name="hasnot_delete">gagal dihapus dari Kesukaan</string>
+</resources>

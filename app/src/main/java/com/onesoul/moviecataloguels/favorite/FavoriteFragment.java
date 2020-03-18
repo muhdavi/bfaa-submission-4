@@ -18,7 +18,6 @@ import java.util.Objects;
 public class FavoriteFragment extends Fragment {
 
     public FavoriteFragment() {
-
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
