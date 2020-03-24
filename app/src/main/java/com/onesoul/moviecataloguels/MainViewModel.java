@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainViewModel extends AndroidViewModel {
-    String API_KEY = "900c7289f83cd201d8f1c7c34edff1fc";
+    String API_KEY = BuildConfig.API_KEY;
 
     private final MutableLiveData<ArrayList<Movie>> listMovies = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Movie>> listMoviesFavorite = new MutableLiveData<>();

@@ -2,6 +2,7 @@ package com.onesoul.moviecataloguels.movie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.onesoul.moviecataloguels.BuildConfig;
 import com.onesoul.moviecataloguels.R;
 import com.onesoul.moviecataloguels.database.DMLHelper;
 
@@ -54,7 +56,7 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
         tvVoteCount.setText(movie.getmVoteCount());
         tvVoteAverage.setText(movie.getmVoteAverage());
         Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w780/" + movie.getmPhoto())
+                .load(BuildConfig.URL_IMAGE + movie.getmPhoto())
                 .placeholder(R.drawable.poster_example)
                 .transform(new FitCenter())
                 .into(imgPhoto);
@@ -78,9 +80,9 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
                 dmlHelper.close();
                 if (result > 0) {
                     btnFavorite.setBackground(getResources().getDrawable(R.drawable.ic_favorite_24px));
-                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + R.string.has_add, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + getString(R.string.has_add), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + R.string.hasnot_add, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + getString(R.string.hasnot_add), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 movie.setmType("movie");
@@ -89,9 +91,9 @@ public class MovieDetailActivity extends AppCompatActivity implements View.OnCli
                 dmlHelper.close();
                 if (result > 0) {
                     btnFavorite.setBackground(getResources().getDrawable(R.drawable.ic_favorite_border_24dp));
-                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + R.string.has_delete, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + getString(R.string.has_delete), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + R.string.hasnot_delete, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), movie.getmTitle() + " " + getString(R.string.hasnot_delete), Toast.LENGTH_SHORT).show();
                 }
             }
         }

@@ -16,6 +16,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", '"900c7289f83cd201d8f1c7c34edff1fc"')
+        buildConfigField("String", "URL_IMAGE", '"https://image.tmdb.org/t/p/w780/"')
     }
 
     buildTypes {

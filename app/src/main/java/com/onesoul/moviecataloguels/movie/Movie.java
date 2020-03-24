@@ -88,7 +88,7 @@ public class Movie implements Parcelable {
 
     public Movie(JSONObject object) {
         try {
-            @SuppressLint("SimpleDateFormat")SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd, mm, yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd, mm, yyyy");
             @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
             int id = object.getInt("id");
             String title = object.getString("title");

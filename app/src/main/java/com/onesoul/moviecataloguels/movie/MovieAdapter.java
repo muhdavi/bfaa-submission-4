@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.onesoul.moviecataloguels.BuildConfig;
 import com.onesoul.moviecataloguels.R;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.tvOverview.setText(getListMovie().get(position).getmOverview());
         holder.tvRate.setText(getListMovie().get(position).getmVoteAverage());
         Glide.with(context)
-                .load("https://image.tmdb.org/t/p/w500/" + getListMovie().get(position).getmPhoto())
+                .load(BuildConfig.URL_IMAGE + getListMovie().get(position).getmPhoto())
                 .apply(new RequestOptions()
                 .placeholder(R.drawable.ic_image_24px)
                 .transform(new RoundedCorners(16)))

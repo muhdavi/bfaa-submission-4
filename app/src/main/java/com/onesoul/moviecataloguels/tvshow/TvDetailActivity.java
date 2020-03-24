@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
+import com.onesoul.moviecataloguels.BuildConfig;
 import com.onesoul.moviecataloguels.R;
 import com.onesoul.moviecataloguels.database.DMLHelper;
 
@@ -56,7 +57,7 @@ public class TvDetailActivity extends AppCompatActivity implements View.OnClickL
         tvVoteCount.setText(tvshow.getmVoteCount());
         tvVoteAverage.setText(tvshow.getmVoteAverage());
         Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w780/" + tvshow.getmPhoto())
+                .load(BuildConfig.URL_IMAGE + tvshow.getmPhoto())
                 .placeholder(R.drawable.poster_example)
                 .transform(new FitCenter())
                 .into(imgPhoto);
